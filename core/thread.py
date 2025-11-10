@@ -816,6 +816,22 @@ class Thread:
         )
 
         return msg
+    
+    async def move_cat(self, to: str):
+
+        if to.lower() == "await_staff":
+            cat_id = self.bot.config['category_awaiting_staff_id']
+        else:
+            cat_id = self.bot.config['category_awaiting_user_id']
+
+        cat = self.bot.get_channel(int(cat_id))
+
+        if self.channel.category != cat:    
+            await self.channel.edit(category=cat)
+            print(f"Moved {self.channel.name} to {cat.name}")
+        else:
+            print(f"{self.channel.name} is already in {cat.name}")
+
 
     async def reply(
         self, message: discord.Message, anonymous: bool = False, plain: bool = False
@@ -904,6 +920,7 @@ class Thread:
                 )
 
         await asyncio.gather(*tasks)
+        await self.move_cat('await_user')
         self.bot.dispatch("thread_reply", self, True, message, anonymous, plain)
         return (user_msg, msg)  # sent_to_user, sent_to_thread_channel
 

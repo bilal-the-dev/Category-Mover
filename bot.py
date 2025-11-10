@@ -928,6 +928,7 @@ class ModmailBot(commands.Bot):
         if not thread.cancelled:
             try:
                 await thread.send(message)
+                await thread.move_cat('await_staff')
             except Exception:
                 logger.error("Failed to send message:", exc_info=True)
                 await self.add_reaction(message, blocked_emoji)

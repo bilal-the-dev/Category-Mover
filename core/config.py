@@ -160,6 +160,8 @@ class ConfigManager:
         # Modmail
         "modmail_guild_id": None,
         "guild_id": None,
+        "category_awaiting_staff_id": None,
+        "category_awaiting_user_id": None,
         "log_url": "https://example.com/",
         "log_url_prefix": "/logs",
         "mongo_uri": None,
